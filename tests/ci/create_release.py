@@ -83,7 +83,9 @@ class ReleaseInfo:
         assert release_type in ("patch", "new")
         if release_type == "new":
             # check commit_ref is right and on a right branch
-            ShellRunner.run(f"git merge-base --is-ancestor origin/{commit_ref} origin/master")
+            ShellRunner.run(
+                f"git merge-base --is-ancestor origin/{commit_ref} origin/master"
+            )
             with checkout(commit_ref):
                 _, commit_sha = ShellRunner.run(f"git rev-parse {commit_ref}")
                 # Git() must be inside "with checkout" contextmanager
